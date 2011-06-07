@@ -7,9 +7,6 @@
 #
 define rabbitmq::ctl::stop() {
 
-	exec { "stop":
-		command	=> "rabbitmqctl stop",
-		path	=> "/usr/sbin"
-	}
+	exec { "stop": command => "/usr/sbin/rabbitmqctl stop" }
 
 }
