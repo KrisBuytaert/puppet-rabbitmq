@@ -1,0 +1,5 @@
+puppet-rabbitmq
+===============
+
+This is an actively maintained rabbitmq puppet module, with full command
+mappings.
