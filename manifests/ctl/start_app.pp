@@ -9,7 +9,9 @@
 #
 define rabbitmq::ctl::start_app() {
 
-	Exec { path => "/usr/sbin" }
-	exec { "start_app": command => "rabbitmqctl start_app" }
+	exec { "start_app":
+		command	=> "rabbitmqctl start_app",
+		path	=> "/usr/sbin",
+	}
 
 }
