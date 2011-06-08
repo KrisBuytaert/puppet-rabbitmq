@@ -5,7 +5,7 @@
 # be stopped, e.g. reset.
 #
 # Usage:
-# rabbitmq::ctl::start_app
+# rabbitmq::ctl::start_app { "start_app": }
 #
 define rabbitmq::ctl::start_app() {
 

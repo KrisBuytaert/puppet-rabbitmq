@@ -7,7 +7,7 @@
 # e.g. with stop_app.
 #
 # Usage:
-# rabbitmq::ctl::reset
+# rabbitmq::ctl::reset { "reset": }
 #
 define rabbitmq::ctl::reset() {
 

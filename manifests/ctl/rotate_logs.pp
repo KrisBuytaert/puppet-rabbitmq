@@ -15,7 +15,7 @@
 # script and you do not want to restart the RabbitMQ node.
 #
 # Usage:
-# rabbitmq::ctl::rotate_logs
+# rabbitmq::ctl::rotate_logs { "rotate_logs": $suffix = ".1" }
 #
 define rabbitmq::ctl::rotate_logs($suffix) {
 

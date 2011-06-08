@@ -6,7 +6,7 @@
 # itself goes down, or takes more than five seconds to come up, it will fail.
 #
 # Usage:
-# rabbitmq::ctl::wait
+# rabbitmq::ctl::wait { "wait": }
 #
 define rabbitmq::ctl::wait() {
 

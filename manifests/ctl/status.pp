@@ -5,7 +5,7 @@
 # part of the broker, which of these are running.
 #
 # Usage:
-# rabbitmq::ctl::status
+# rabbitmq::ctl::status { "status": }
 #
 define rabbitmq::ctl::status() {
 

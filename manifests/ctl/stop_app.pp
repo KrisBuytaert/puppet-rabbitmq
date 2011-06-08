@@ -5,7 +5,7 @@
 # the RabbitMQ application to be stopped, e.g. reset.
 #
 # Usage:
-# rabbitmq::ctl::stop_app
+# rabbitmq::ctl::stop_app { "stop_app": }
 #
 define rabbitmq::ctl::stop_app() {
 

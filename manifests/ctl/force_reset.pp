@@ -8,7 +8,7 @@
 # succeed the RabbitMQ application must have been stopped, e.g. with stop_app.
 #
 # Usage:
-# rabbitmq::ctl::force_reset
+# rabbitmq::ctl::force_reset { "force_reset": }
 #
 define rabbitmq::ctl::force_reset() {
 
