@@ -10,7 +10,7 @@
 #
 define rabbitmq::ctl() {
 
-	exec { "ctl":
+	exec { "rabbitmq_ctl_${name}":
 		command	=> "/usr/sbin/rabbitmqctl $title",
 		require	=> Service["rabbitmq-server"],
 	}
