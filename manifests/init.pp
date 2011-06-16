@@ -5,6 +5,7 @@
 #
 # Usage:
 # include rabbitmq
+#
 class rabbitmq {
 
 	# Ensure rabbitmq is installed:
