@@ -14,20 +14,23 @@
 #
 define rabbitmq::user($password='', $ensure="present") {
 
-        $cmd = $ensure ? {
-          'absent'  => 'delete_user',
-          'present' => 'add_user',
-        }
-
-        $check = $ensure ? {
-          'absent'  => '-v',
-          'present' => '',
-        }
-        
-	exec { "rabbitmq_user_${name}":
-		command	    => "/usr/sbin/rabbitmqctl ${cmd} ${name} ${password}",
-                # remark: below we have a tab in the argument of grep
-		unless      => "/usr/sbin/rabbitmqctl list_users | /bin/grep ${check} \"^${name}	\"",
+    case $ensure {
+      'present':  {
+	exec { "rabbitmq_user_${$name}":
+		command	    => "/usr/sbin/rabbitmqctl add_user ${name} ${password}",
+                # remark: below we have multiple tabs in the argument of grep
+		unless      => "/usr/sbin/rabbitmqctl list_users | /bin/grep \"^${name}	\"",
 		require	    => Class["rabbitmq"],
 	}
+      } 
+      'absent' : {
+	exec { "rabbitmq_user_${$name}":
+		command	    => "/usr/sbin/rabbitmqctl delete_user ${name} ${password}",
+                # remark: below we have a tab in the argument of grep
+		onlyif      => "/usr/sbin/rabbitmqctl list_users | /bin/grep \"^${name}	\"",
+		require	    => Class["rabbitmq"],
+	}
+      }
+    }
+
 }
