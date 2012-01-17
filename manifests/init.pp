@@ -13,7 +13,11 @@ class rabbitmq {
 
 	# Ensure rabbitmq is running:
 	service { "rabbitmq-server":
-		enable		=> true,
+		enable		=> $operatingsystem ? {
+                  "Debian" => undef,
+                  "Ubuntu" => undef,
+                  default  => true
+                },
 		ensure		=> running,
 		hasrestart	=> true,
 		hasstatus	=> true,
