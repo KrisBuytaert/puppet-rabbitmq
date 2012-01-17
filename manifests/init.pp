@@ -11,13 +11,15 @@ class rabbitmq {
   # Ensure rabbitmq is installed:
   package { 'rabbitmq-server': ensure => present }
 
-  # Ensure rabbitmq is running:
-  service { 'rabbitmq-server':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
-    hasstatus  => true,
-    require    => Package['rabbitmq-server'],
+  service { "rabbitmq-server":
+    enable      => $operatingsystem ? {
+      "Debian"  => undef,
+      "Ubuntu"  => undef,
+      default   => true
+    },
+    ensure      => running,
+    hasrestart  => true,
+    hasstatus   => true,
+    require     => Package["rabbitmq-server"],
   }
-
 }
