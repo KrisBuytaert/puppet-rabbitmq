@@ -7,8 +7,8 @@
 #
 class rabbitmq::absent inherits rabbitmq {
 
-	Package["rabbitmq-server"] {
-		ensure	=> absent,
-	}
+  Package['rabbitmq-server'] {
+    ensure => absent,
+  }
 
 }
