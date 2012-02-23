@@ -11,17 +11,20 @@ class rabbitmq::stomp {
 
 
   file { '/etc/rabbitmq/enabled_plugins':
-    group  => '0',
-    mode   => '644',
-    owner  => '0',
-    source => 'puppet:///modules/rabbitmq/enabled_plugins';
+    ensure => 'present',
+    group  => 'root',
+    owner  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/rabbitmq/enabled_plugins',
   }
 
   file { '/etc/rabbitmq/rabbitmq.config':
-    group  => '0',
-    mode   => '644',
-    owner  => '0',
-    source => 'puppet:///modules/rabbitmq/rabbitmq.config';
+    ensure => 'present',
+    mode   => '0644',
+    group  => 'root',
+    owner  => 'root',
+    source => 'puppet:///modules/rabbitmq/rabbitmq.config',
+    require => Package['rabbitmq-server'],
   }
 
 
