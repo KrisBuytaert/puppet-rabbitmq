@@ -16,6 +16,7 @@ class rabbitmq::stomp {
     owner  => 'root',
     mode   => '0644',
     source => 'puppet:///modules/rabbitmq/enabled_plugins',
+    require => Package['rabbitmq-server'],
   }
 
   file { '/etc/rabbitmq/rabbitmq.config':
