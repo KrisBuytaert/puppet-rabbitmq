@@ -5,14 +5,14 @@
 #
 # Usage:
 #
-#	rabbitmq::ctl { "stop_app": }
-#	rabbitmq::ctl { "cluster rabbit@r0 rabbit@r1": }
+# rabbitmq::ctl { 'stop_app': }
+# rabbitmq::ctl { 'cluster rabbit@r0 rabbit@r1': }
 #
 define rabbitmq::ctl() {
 
-	exec { "rabbitmq_ctl_${name}":
-		command	=> "/usr/sbin/rabbitmqctl $title",
-		require	=> Service["rabbitmq-server"],
-	}
+  exec { "rabbitmq_ctl_${name}":
+    command => "/usr/sbin/rabbitmqctl ${title}",
+    require => Service['rabbitmq-server'],
+  }
 
 }

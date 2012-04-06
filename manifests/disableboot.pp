@@ -9,8 +9,8 @@
 #
 class rabbitmq::disableboot inherits rabbitmq {
 
-	Service["rabbitmq-server"] {
-		enable	=> false,
-	}
+  Service['rabbitmq-server'] {
+    enable => false,
+  }
 
 }

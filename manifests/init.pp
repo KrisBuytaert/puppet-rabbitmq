@@ -9,11 +9,11 @@
 class rabbitmq {
 
   # Ensure rabbitmq is installed:
-  package { 'rabbitmq-server': ensure => 'present', }
+  package { 'rabbitmq-server': ensure => present }
 
   # Ensure rabbitmq is running:
   service { 'rabbitmq-server':
-    ensure     => 'running',
+    ensure     => running,
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
