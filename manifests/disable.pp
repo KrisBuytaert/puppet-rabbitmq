@@ -7,9 +7,9 @@
 #
 class rabbitmq::disable inherits rabbitmq {
 
-	Service["rabbitmq-server"] {
-		enable	=> false,
-		ensure	=> stopped,
-	}
+  Service['rabbitmq-server'] {
+    enable => false,
+    ensure => stopped,
+  }
 
 }
