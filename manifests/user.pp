@@ -4,33 +4,40 @@
 #
 # Usage:
 #
-#	rabbitmq::user { "myuser":
-#         password => 'mypass';
-#       }
-#	rabbitmq::user { "myuser2":
-#         ensure => "absent";
-#       }
+# rabbitmq::user { "myuser":
+#   password => 'mypass';
+# }
+# rabbitmq::user { "myuser2":
+#   ensure => "absent";
+# }
 #
 #
-define rabbitmq::user($password='', $ensure="present") {
+define rabbitmq::user($password='', $ensure='present') {
 
-    case $ensure {
-      'present':  {
-	exec { "rabbitmq_user_${$name}":
-		command	    => "/usr/sbin/rabbitmqctl add_user ${name} ${password}",
-                # remark: below we have multiple tabs in the argument of grep
-		unless      => "/usr/sbin/rabbitmqctl list_users | /bin/grep \"^${name}	\"",
-		require	    => Class["rabbitmq"],
-	}
-      } 
-      'absent' : {
-	exec { "rabbitmq_user_${$name}":
-		command	    => "/usr/sbin/rabbitmqctl delete_user ${name} ${password}",
-                # remark: below we have a tab in the argument of grep
-		onlyif      => "/usr/sbin/rabbitmqctl list_users | /bin/grep \"^${name}	\"",
-		require	    => Class["rabbitmq"],
-	}
+  Exec {
+    path => '/usr/bin:/bin:/usr/sbin:/bin'
+  }
+
+  case $ensure {
+    'present':  {
+      exec { "rabbitmq_user_${$name}":
+        command => "rabbitmqctl add_user ${name} ${password}",
+        # remark: below we have multiple tabs in the argument of grep
+        unless  =>  "rabbitmqctl list_users | grep \"^${name}	\"",
+        require => Class['rabbitmq'],
       }
     }
+    'absent' : {
+      exec { "rabbitmq_user_${$name}":
+        command => "rabbitmqctl delete_user ${name} ${password}",
+        # remark: below we have a tab in the argument of grep
+        onlyif  => "rabbitmqctl list_users | grep \"^${name}	\"",
+        require => Class['rabbitmq'],
+      }
+    }
+    default: {
+      fail('use present or absent in rabbitmq::user')
+    }
+  }
 
 }

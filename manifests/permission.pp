@@ -4,40 +4,51 @@
 #
 # Usage:
 #
-#	rabbitmq::permission { "myuser":
-#         vhostpath => '/', #default
-#         $conf     => "^amq.gen-.*",
-#         $write    => ".*",
-#         $read     => ".*";
-#       }
-#	rabbitmq::permission { "myuser":
-#         ensure => "absent",
-#         vhostpath => '/', #default
-#         $conf     => "^amq.gen-.*",
-#         $write    => ".*",
-#         $read     => ".*";
-#       }
+# rabbitmq::permission { "myuser":
+#   vhostpath => '/', #default
+#   $conf     => "^amq.gen-.*",
+#   $write    => ".*",
+#   $read     => ".*";
+# }
+# rabbitmq::permission { "myuser":
+#   ensure => "absent",
+#   vhostpath => '/', #default
+#   $conf     => "^amq.gen-.*",
+#   $write    => ".*",
+#   $read     => ".*";
+# }
 #
 #
-define rabbitmq::permission( $vhostpath = "/", $user=$name, $conf, $write, $read, $ensure="present") {
+define rabbitmq::permission(
+  $conf, $write, $read,
+  $vhostpath = '/',
+  $user=$name,
+  $ensure='present')
+{
 
-    case $ensure {
-      'present':  {
-	exec { "rabbitmq_permission_${$user}":
-		command	    => "/usr/sbin/rabbitmqctl set_permissions -p ${vhostpath} ${user} \"${conf}\" \"${write}\" \"${read}\"",
-                # remark: below we have multiple tabs in the argument of grep
-		unless      => "/usr/sbin/rabbitmqctl list_permissions -p ${vhostpath} | /bin/grep '^${name}	${conf}	${write}	${read}\$'",	
-		require	    => Class["rabbitmq"],
-	}
-      } 
-      'absent' : {
-	exec { "rabbitmq_permission_${$user}":
-		command	    => "/usr/sbin/rabbitmqctl clear_permissions -p ${vhostpath} ${user}",
-                # remark: below we have a tab in the argument of grep
-		onlyif      => "/usr/sbin/rabbitmqctl list_permissions -p ${vhostpath} | /bin/grep '^${name}	",	
-		require	    => Class["rabbitmq"],
-	}
+  Exec {
+    path => '/usr/bin:/bin:/usr/sbin:/bin'
+  }
+
+  case $ensure {
+    'present':  {
+      exec { "rabbitmq_permission_${$user}":
+        command => "rabbitmqctl set_permissions -p ${vhostpath} ${user} \"${conf}\" \"${write}\" \"${read}\"",
+        # remark: below we have multiple tabs in the argument of grep
+        unless  => "rabbitmqctl list_permissions -p ${vhostpath} | grep '^${name}	${conf}	${write}	${read}\$'",	
+        require => Class['rabbitmq'],
       }
     }
-
+    'absent' : {
+      exec { "rabbitmq_permission_${$user}":
+        command => "rabbitmqctl clear_permissions -p ${vhostpath} ${user}",
+        # remark: below we have a tab in the argument of grep
+        onlyif  => "rabbitmqctl list_permissions -p ${vhostpath} | grep '^${name}	",	
+        require => Class['rabbitmq'],
+      }
+    }
+    default: {
+      fail('use present or absent in rabbitmq::permission')
+    }
+  }
 }
