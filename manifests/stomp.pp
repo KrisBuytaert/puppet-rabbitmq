@@ -8,7 +8,10 @@
 
 # Ugly hack using static files ..
 # There most probably is a better approach to this
-class rabbitmq::stomp ( $stomp_tcp_listener_host = "127.0.0.1", $stomp_tcp_listener_port = 6163)  {
+class rabbitmq::stomp (
+  $stomp_tcp_listener_host = '127.0.0.1',
+  $stomp_tcp_listener_port = 6163)
+{
 
   file { '/etc/rabbitmq/enabled_plugins':
     group  => '0',
