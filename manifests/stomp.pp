@@ -22,7 +22,7 @@ class rabbitmq::stomp (
 
   file { '/etc/rabbitmq/rabbitmq.config':
     group   => '0',
-    mode    => '644',
+    mode    => '0644',
     owner   => '0',
     notify  => Service['rabbitmq-server'],
     content => template('rabbitmq/rabbitmq.config-stomp.erb');
