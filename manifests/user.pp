@@ -23,7 +23,7 @@ define rabbitmq::user($password='', $ensure='present') {
       exec { "rabbitmq_user_${$name}":
         command => "rabbitmqctl add_user ${name} ${password}",
         # remark: below we have multiple tabs in the argument of grep
-        unless  =>  "rabbitmqctl list_users | grep \"^${name}	\"",
+        unless  =>  "rabbitmqctl list_users | grep \"^${name}$\"",
         require => Class['rabbitmq'],
       }
     }
@@ -31,7 +31,7 @@ define rabbitmq::user($password='', $ensure='present') {
       exec { "rabbitmq_user_${$name}":
         command => "rabbitmqctl delete_user ${name} ${password}",
         # remark: below we have a tab in the argument of grep
-        onlyif  => "rabbitmqctl list_users | grep \"^${name}	\"",
+        onlyif  => "rabbitmqctl list_users | grep \"^${name}$\"",
         require => Class['rabbitmq'],
       }
     }
