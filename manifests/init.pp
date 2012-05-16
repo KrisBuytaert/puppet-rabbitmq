@@ -18,7 +18,7 @@ class rabbitmq {
   }
   # Ensure rabbitmq is running:
   service { 'rabbitmq-server':
-    ensure     => 'running',
+    ensure      => 'running',
     enable      => $enable,
     hasrestart  => true,
     hasstatus   => true,
