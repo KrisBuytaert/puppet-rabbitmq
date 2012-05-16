@@ -14,10 +14,11 @@ class rabbitmq::stomp (
 {
 
   file { '/etc/rabbitmq/enabled_plugins':
-    group  => '0',
-    mode   => '0644',
-    owner  => '0',
-    source => 'puppet:///modules/rabbitmq/enabled_plugins';
+    group   => '0',
+    mode    => '0644',
+    owner   => '0',
+    source  => 'puppet:///modules/rabbitmq/enabled_plugins',
+    require => Package['rabbitmq-server'],
   }
 
   file { '/etc/rabbitmq/rabbitmq.config':
@@ -25,7 +26,8 @@ class rabbitmq::stomp (
     mode    => '0644',
     owner   => '0',
     notify  => Service['rabbitmq-server'],
-    content => template('rabbitmq/rabbitmq.config-stomp.erb');
+    content => template('rabbitmq/rabbitmq.config-stomp.erb'),
+    require => Package['rabbitmq-server'],
   }
 
 }
