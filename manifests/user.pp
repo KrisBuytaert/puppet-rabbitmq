@@ -1,6 +1,7 @@
 # Define: rabbitmq::user
 #
 # Execute a rabbitmqctl command to create a user.
+# It has been tested with version 2.7.
 #
 # Usage:
 #
