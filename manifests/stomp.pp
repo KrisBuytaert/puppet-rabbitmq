@@ -13,12 +13,16 @@ class rabbitmq::stomp (
   $stomp_tcp_listener_port = 6163)
 {
 
-  file { '/etc/rabbitmq/enabled_plugins':
-    group   => '0',
-    mode    => '0644',
-    owner   => '0',
-    source  => 'puppet:///modules/rabbitmq/enabled_plugins',
-    require => Package['rabbitmq-server'],
+  #  file { '/etc/rabbitmq/enabled_plugins':
+  #  group   => '0',
+  #  mode    => '0644',
+  #  owner   => '0',
+  #  source  => 'puppet:///modules/rabbitmq/enabled_plugins',
+  #  require => Package['rabbitmq-server'],
+  #}
+
+  rabbitmq::enableplugins{'rabbitmq_stomp':
+    plugin => 'rabbitmq_stomp'
   }
 
   file { '/etc/rabbitmq/rabbitmq.config':

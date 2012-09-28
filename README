@@ -5,4 +5,8 @@ This is an actively maintained rabbitmq puppet module, with full command
 mappings.
 
 
-Ugly hack to enabled stomp support added (Kris Buytaert) 
+Ugly hack to enabled stomp support added (Kris Buytaert)
+
+Refactoring to enable support for multiple plugins and more config detail.
+
+

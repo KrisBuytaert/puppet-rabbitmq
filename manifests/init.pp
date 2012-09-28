@@ -6,8 +6,11 @@
 #
 #   include rabbitmq
 #
-class rabbitmq {
-
+class rabbitmq (
+  $plugins=$rabbitmq::params::plugins
+)
+{
+  require rabbitmq::params
   include rabbitmq::package
   include rabbitmq::config
   include rabbitmq::service
