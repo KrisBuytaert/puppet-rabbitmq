@@ -12,6 +12,9 @@
 #   ensure => "absent";
 # }
 #
+# TODO :  Password changing feature.
+#
+
 #
 define rabbitmq::user($password='', $ensure='present') {
 
