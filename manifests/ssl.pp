@@ -19,4 +19,10 @@ class rabbitmq::ssl{
     require => Package['rabbitmq-server'],
   }
 
+  file { '/etc/rabbitmq/ssl/':
+    ensure => 'directory',
+    group  => '0',
+    mode   => '0755',
+    owner  => '0',
+  }
 }
