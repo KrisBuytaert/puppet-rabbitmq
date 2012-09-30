@@ -4,6 +4,7 @@ puppet-rabbitmq
 This is an actively maintained rabbitmq puppet module, with full command
 mappings.
 
+This module needs the concat module from RI
 
 Ugly hack to enabled stomp support added (Kris Buytaert)
 
