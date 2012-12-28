@@ -13,8 +13,8 @@
 # }
 #
 # TODO :  Password changing feature.
+# TODO :  Fix the tabs in the grep expressions. Use \t or sth.
 #
-
 #
 define rabbitmq::user($password='', $ensure='present') {
 

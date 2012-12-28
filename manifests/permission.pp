@@ -35,7 +35,7 @@ define rabbitmq::permission(
       exec { "rabbitmq_permission_${$user}":
         command => "rabbitmqctl set_permissions -p ${vhostpath} ${user} \"${conf}\" \"${write}\" \"${read}\"",
         # remark: below we have multiple tabs in the argument of grep
-        unless  => "rabbitmqctl list_permissions -p ${vhostpath} | grep '^${user}	${conf}	${write}	${read}\$'",
+        unless  => "rabbitmqctl list_permissions -p ${vhostpath} | grep '^${user} ${conf} ${write}  ${read}\$'",
         require => Class['rabbitmq'],
       }
     }
@@ -43,7 +43,7 @@ define rabbitmq::permission(
       exec { "rabbitmq_permission_${$user}":
         command => "rabbitmqctl clear_permissions -p ${vhostpath} ${user}",
         # remark: below we have a tab in the argument of grep
-        onlyif  => "rabbitmqctl list_permissions -p ${vhostpath} | grep '^${user}	'",
+        onlyif  => "rabbitmqctl list_permissions -p ${vhostpath} | grep '^${user} '",
         require => Class['rabbitmq'],
       }
     }

@@ -6,7 +6,7 @@
 # include rabbitmq::sslgenerate
 #
 
-# This requires Joe Miller ssl script 
+# This requires Joe Miller ssl script
 # As a submodule of the rabbitmq ssl module  There most probably is a better approach to this
 class rabbitmq::sslgenerate{
   file { '/usr/local/ssl-gen':
