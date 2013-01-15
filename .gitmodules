@@ -1,3 +1,0 @@
-[submodule "files/ssl"]
-	path = files/ssl
-	url = git://github.com/joemiller/joemiller.me-intro-to-sensu
