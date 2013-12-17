@@ -8,6 +8,12 @@
 #
 class rabbitmq::service {
 
+  $enable = $::operatingsystem ? {
+    'Debian'  => undef,
+    'Ubuntu'  => undef,
+    default   => true
+  }
+  
   # Ensure rabbitmq is running:
   service { 'rabbitmq-server':
     ensure      => 'running',
