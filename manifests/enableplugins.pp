@@ -2,10 +2,16 @@
 
 define rabbitmq::enableplugins ($plugin)
 {
-  concat::fragment {$name:
-    target  => '/etc/rabbitmq/enabled_plugins',
-    content => template('rabbitmq/enabled_plugins.erb'),
-    order   => 10,
+
+  Exec {
+    path => '/usr/bin:/usr/sbin:/bin',
+  }
+
+  exec {"enable plugin ${plugin}":
+    command   => "rabbitmq-plugins enable $plugin",
+    unless    => "rabbitmq-plugins list -E | grep ${plugin}",
+    notify    => Service['rabbitmq-server'],
+    logoutput => 'on_failure',
   }
 
 }
