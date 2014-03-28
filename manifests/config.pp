@@ -14,7 +14,6 @@ class rabbitmq::config($plugins=$rabbitmq::params::plugins)
       group   => '0',
       mode    => '0644',
       owner   => '0',
-      content => '[].',
       require => Package['rabbitmq-server'],
       notify  => Service['rabbitmq-server'],
     }
