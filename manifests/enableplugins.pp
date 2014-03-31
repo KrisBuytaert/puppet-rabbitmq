@@ -4,7 +4,8 @@ define rabbitmq::enableplugins ($plugin)
 {
 
   Exec {
-    path => '/usr/bin:/usr/sbin:/bin',
+    path        => '/usr/bin:/usr/sbin:/bin',
+    environment => 'HOME=/var/lib/rabbitmq'
   }
 
   exec {"enable plugin ${plugin}":
