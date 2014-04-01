@@ -13,7 +13,7 @@ class rabbitmq::service {
     'Ubuntu'  => undef,
     default   => true
   }
-  
+
   # Ensure rabbitmq is running:
   service { 'rabbitmq-server':
     ensure      => 'running',
