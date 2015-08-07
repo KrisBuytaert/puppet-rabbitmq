@@ -19,9 +19,9 @@ class rabbitmq::sslgenerate{
   }
 
   exec {'/usr/local/ssl-gen/ssl_certs.sh generate':
-    cwd           => '/usr/local/ssl-gen',
-    require       => File['/usr/local/ssl-gen'],
-    unless        => 'test -f /usr/local/ssl-gen/server_key.pem',
+    cwd     => '/usr/local/ssl-gen',
+    require => File['/usr/local/ssl-gen'],
+    unless  => 'test -f /usr/local/ssl-gen/server_key.pem',
     # creates     => '/usr/local/ssl-gen/server_key.pem',
     # refreshonly => true,
   }
